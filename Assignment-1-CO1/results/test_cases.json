@@ -1,0 +1,9 @@
+[
+ {"case":"0->119","algorithm":"BFS","found":true,"cost":17.34,"depth":6,"generated":71,"expanded":48,"max_frontier":25},
+ {"case":"0->119","algorithm":"UCS","found":true,"cost":17.34,"depth":6,"generated":60,"expanded":39,"max_frontier":22},
+ {"case":"0->120","algorithm":"BFS","found":false,"depth":-1,"generated":120,"expanded":120,"max_frontier":27},
+ {"case":"0->120","algorithm":"UCS","found":false,"depth":-1,"generated":125,"expanded":120,"max_frontier":28},
+ {"case":"10->10","algorithm":"BFS","found":true,"cost":0,"depth":0,"generated":1,"expanded":1,"max_frontier":1},
+ {"case":"10->10","algorithm":"UCS","found":true,"cost":0,"depth":0,"generated":1,"expanded":1,"max_frontier":1},
+ {"case":"recursive-small","algorithm":"Recursive-DLS","found":true,"cost":2,"depth":2,"generated":3,"expanded":3,"max_frontier":1}
+]
