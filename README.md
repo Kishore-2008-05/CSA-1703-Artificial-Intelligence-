@@ -255,3 +255,30 @@ For **each assignment**, organise the final submission in this order:
 [Open the CSA17 Artificial Intelligence GitHub repository](https://github.com/Kishore-2008-05/CSA-1703-Artificial-Intelligence-)
 
 **End of README**
+
+
+---
+
+# 8. Assignment 3 – CO3: Logical Agents and First-Order Reasoning
+
+[Open Assignment 3 folder](Assignment-3-CO3/)
+
+- [Detailed report](Assignment-3-CO3/REPORT.md)
+- [Task-wise explanations](Assignment-3-CO3/Tasks/)
+- [Python logic implementations](Assignment-3-CO3/logic_lab.py)
+- [Assignment instructions and run guide](Assignment-3-CO3/README.md)
+
+This pair assignment covers Wumpus-world knowledge bases, truth-table entailment, propositional resolution, first-order knowledge engineering, unification, lifted inference, first-order resolution, forward/backward chaining and a hospital medication-safety advisor. Complete the contribution record with the actual two students' names and work.
+
+# 9. Assignment 4 – CO4: Learning Algorithms
+
+[Open Assignment 4 folder](Assignment-4-CO4/)
+
+- [Detailed report](Assignment-4-CO4/REPORT.md)
+- [Task-wise explanations](Assignment-4-CO4/Tasks/)
+- [Python learning implementations](Assignment-4-CO4/learning_lab.py)
+- [Assignment instructions and run guide](Assignment-4-CO4/README.md)
+
+This individual assignment covers learning-protocol validation, decision trees, Gaussian-mixture EM, neural-network backpropagation, Naive Bayes, SVMs, explanation-based learning and reinforcement learning.
+
+**Submission note:** The new folders contain design/report material and runnable teaching prototypes. Re-run and extend the experiments to satisfy every required dataset size, seed count, comparison, trace and graph in the original briefs before final submission.
