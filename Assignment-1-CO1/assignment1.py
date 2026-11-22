@@ -50,10 +50,10 @@ def ucs(g,s,goal):
     return Result('UCS',found,p,dist.get(goal,float('inf')),gen,exp,peak,0)
 
 def recursive_dls(g,s,goal,limit):
-    gen=1;exp=0
+    gen=1;exp=0;peak=1
     def visit(u,left,path,seen):
-        nonlocal gen,exp
-        exp+=1
+        nonlocal gen,exp,peak
+        exp+=1;peak=max(peak,len(path))
         if u==goal:return path
         if left==0:return None
         for v,_ in g.get(u,[]):
@@ -63,7 +63,7 @@ def recursive_dls(g,s,goal,limit):
         return None
     t=time.perf_counter();p=visit(s,limit,[s],{s});sec=time.perf_counter()-t
     cost=sum(next(w for v,w in g[a] if v==b) for a,b in zip(p,p[1:])) if p else float('inf')
-    return Result('Recursive-DLS',p is not None,p or [],cost,gen,exp,1,sec)
+    return Result('Recursive-DLS',p is not None,p or [],cost,gen,exp,peak,sec)
 
 def make_graph(n,seed=17):
     r=random.Random(seed);g={i:[] for i in range(n)}
