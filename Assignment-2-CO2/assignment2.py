@@ -51,8 +51,8 @@ def make_grid(kind):
         g[23][12]=False
     return g
 
-def online_dfs(rows=8,cols=8,target=(7,7),seed=4):
-    rng=random.Random(seed);blocked={(r,c) for r in range(rows) for c in range(cols) if rng.random()<.16};blocked.discard((0,0));blocked.discard(target)
+def online_dfs(rows=8,cols=8,target=(7,7),seed=4,density=.16):
+    rng=random.Random(seed);blocked={(r,c) for r in range(rows) for c in range(cols) if rng.random()<density};blocked.discard((0,0));blocked.discard(target)
     def neigh(p):
         r,c=p
         return [(r+dr,c+dc) for dr,dc in ((0,1),(1,0),(0,-1),(-1,0)) if 0<=r+dr<rows and 0<=c+dc<cols and (r+dr,c+dc) not in blocked]
@@ -181,6 +181,14 @@ def main():
             t=time.perf_counter();r=grid_search(g,(0,0),(24,24),alg);r['seconds']=time.perf_counter()-t;r['map']=name;gridrows.append(r)
     results['grid_search']=gridrows
     results['online_dfs']=[online_dfs(8,8,(7,7),s) for s in (0,1,2,7)]
+    # Vary map dimensions, target distance and dead-end/obstacle density.
+    results['online_matrix']=[]
+    for size in (6,8,12):
+        for density in (.05,.16,.30):
+            for target in ((size//2,size//2),(size-1,size-1)):
+                for seed in (11,12,13):
+                    row=online_dfs(size,size,target,seed,density)
+                    results['online_matrix'].append({'size':size,'density':density,'target':target,'seed':seed,**row})
     good=[[8,9],[1,2]];bad=[[1,2],[8,9]];equal=[[4,4],[4,4]]
     results['game_trees']={n:{'minimax':minimax(t,3),'alphabeta':alphabeta(t)} for n,t in [('favorable',good),('unfavorable',bad),('equal',equal)]}
     results['minimax_scaling']=[{'branching':b,'depth':d,'nodes':sum(b**i for i in range(d+1)),'leaf_evaluations':b**d} for b,d in ((2,3),(3,4),(4,5))]
