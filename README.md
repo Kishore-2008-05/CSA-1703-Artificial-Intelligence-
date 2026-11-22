@@ -282,3 +282,13 @@ This pair assignment covers Wumpus-world knowledge bases, truth-table entailment
 This individual assignment covers learning-protocol validation, decision trees, Gaussian-mixture EM, neural-network backpropagation, Naive Bayes, SVMs, explanation-based learning and reinforcement learning.
 
 **Submission note:** The new folders contain design/report material and runnable teaching prototypes. Re-run and extend the experiments to satisfy every required dataset size, seed count, comparison, trace and graph in the original briefs before final submission.
+
+
+## 10. Assignment 5 – CO5: Agents, Intelligent Systems and Real-Time AI
+
+- [Assignment 5 folder](Assignment-5-CO5/)
+- [Assignment 5 report](Assignment-5-CO5/REPORT.md)
+- [Runnable Python baseline](Assignment-5-CO5/assignment5.py)
+- [Setup and run instructions](Assignment-5-CO5/README.md)
+
+This package includes a hybrid drone/grid simulator, decentralised swarm experiments, an expert-system rule engine, a synthetic edge-model comparison and an eight-intent retrieval chatbot. See the Assignment 5 README and report for limitations and additional experiments still required by the rubric. Synthetic data are clearly labelled and must not be reported as public-dataset evidence.
