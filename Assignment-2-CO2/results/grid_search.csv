@@ -1,0 +1,13 @@
+algorithm,found,path_cost,optimal,generated,expanded,max_frontier,map
+ucs,True,48,True,625,625,25,open
+greedy,True,48,True,95,49,47,open
+astar,True,48,True,625,625,25,open
+ucs,True,48,True,482,482,23,cluttered
+greedy,True,52,False,94,57,38,cluttered
+astar,True,48,True,395,374,36,cluttered
+ucs,True,48,True,459,459,19,maze
+greedy,True,48,True,80,49,32,maze
+astar,True,48,True,421,408,27,maze
+ucs,True,48,True,603,603,24,trap
+greedy,True,48,True,94,49,46,trap
+astar,True,48,True,603,603,24,trap
