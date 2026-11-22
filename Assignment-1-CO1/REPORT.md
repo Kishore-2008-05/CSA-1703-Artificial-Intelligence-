@@ -37,7 +37,7 @@ Substitution gives T(l)=b^lT(0)+c(1+b+...+b^(l-1))=Θ(b^l) for b>1. Iterative de
 assignment1.py implements BFS, UCS, recursive DLS and seeded sparse graph generation. Cases: reachable 0→119, unreachable 0→120, start=goal 10→10; DLS is validated on a small graph to avoid Python recursion limits. BFS/UCS share seeded graph and start/goal pairs at 1k, 10k, 100k and 1m vertices.
 
 ## Task 9 – Performance evidence
-Run python assignment1.py. Raw data: results/scaling.csv, results/test_cases.json, results/belief_states.json. BFS/UCS times average five runs.
+Run python assignment1.py. Raw data: results/scaling.csv, results/test_cases.json, results/belief_states.json. Graphs: results/nodes_expanded.svg and results/runtime.svg. BFS/UCS times average five runs.
 
 | States | BFS expanded | UCS expanded | BFS generated | UCS generated |
 |---:|---:|---:|---:|---:|
