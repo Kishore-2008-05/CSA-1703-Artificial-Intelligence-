@@ -173,6 +173,29 @@ def two_opt(dist,restarts=20,seed=3):
         if c<best:best,besttour=c,t[:]
     return best,besttour
 
+def nim_can_force_win(stones):
+    """Exact minimax win/loss evaluation for a take-1-or-2 stones game."""
+    if stones<=0:return False
+    return any(not nim_can_force_win(stones-take) for take in (1,2) if take<=stones)
+
+def nim_minimax_move(stones):
+    for take in (1,2):
+        if take<=stones and not nim_can_force_win(stones-take):return take
+    return 1
+
+def nim_quality(games=20,initial=10,seed=29):
+    rng=random.Random(seed);wins=0
+    for _ in range(games):
+        stones=initial;ai_turn=True
+        while stones>0:
+            take=nim_minimax_move(stones) if ai_turn else rng.randint(1,min(2,stones))
+            stones-=take
+            if stones<=0:
+                if ai_turn:wins+=1
+                break
+            ai_turn=not ai_turn
+    return {'games':games,'initial_stones':initial,'ai_wins':wins,'win_rate_percent':100*wins/games,'opponent':'uniform random legal take of 1 or 2'}
+
 def main():
     os.makedirs('results',exist_ok=True);results={}
     gridrows=[]
@@ -194,6 +217,7 @@ def main():
     results['game_trees']={n:{'minimax':minimax(t,3),'alphabeta':alphabeta(t)} for n,t in [('favorable',good),('unfavorable',bad),('equal',equal)]}
     results['minimax_scaling']=[{'branching':b,'depth':d,'nodes':sum(b**i for i in range(d+1)),'leaf_evaluations':b**d} for b,d in ((2,3),(3,4),(4,5))]
     results['depth_limited_evaluation_demo']={'value_and_evaluation_calls':depth_limited_minimax([[3,5],[1,9]],2)}
+    results['minimax_quality']=nim_quality()
     domains={'A':[1,2],'B':[1,2],'C':[1,2],'D':[1,2]};edges=[('A','B'),('B','C'),('C','D'),('D','A')]
     impossible={'P':[1],'Q':[1],'R':[1,2]};iedges=[('P','Q')]
     results['csp']={'without_propagation':exam_csp(domains,edges,False),'with_propagation':exam_csp(domains,edges,True),'propagation_failure_without_search':exam_csp(impossible,iedges,True)}
