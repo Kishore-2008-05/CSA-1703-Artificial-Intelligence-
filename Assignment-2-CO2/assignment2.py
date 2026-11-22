@@ -74,6 +74,24 @@ def online_dfs(rows=8,cols=8,target=(7,7),seed=4):
             visited.add(v);moves+=1;stack.append((v,iter(neigh(v))))
     return {'found':False,'moves':moves,'revisited':revisits,'optimal_cost':optimal,'competitive_ratio':None}
 
+def evaluation_function(position):
+    """Student-defined leaf evaluation: material + mobility + objective progress."""
+    if isinstance(position,(int,float)): return float(position)
+    return 3*position.get('material',0)+position.get('mobility',0)+2*position.get('objective_progress',0)-2*position.get('danger',0)
+
+def depth_limited_minimax(tree,depth,maximizing=True):
+    """Depth-limited minimax; evaluate positions at the cutoff depth."""
+    calls=0
+    def visit(node,left,maxing):
+        nonlocal calls
+        if left==0 or not isinstance(node,list):
+            calls+=1
+            return evaluation_function(node)
+        values=[visit(ch,left-1,not maxing) for ch in node]
+        return max(values) if maxing else min(values)
+    value=visit(tree,depth,maximizing)
+    return value,calls
+
 def minimax(tree,depth,maximizing=True):
     if not isinstance(tree,list):return tree,1,0
     vals=[];nodes=1
@@ -166,6 +184,7 @@ def main():
     good=[[8,9],[1,2]];bad=[[1,2],[8,9]];equal=[[4,4],[4,4]]
     results['game_trees']={n:{'minimax':minimax(t,3),'alphabeta':alphabeta(t)} for n,t in [('favorable',good),('unfavorable',bad),('equal',equal)]}
     results['minimax_scaling']=[{'branching':b,'depth':d,'nodes':sum(b**i for i in range(d+1)),'leaf_evaluations':b**d} for b,d in ((2,3),(3,4),(4,5))]
+    results['depth_limited_evaluation_demo']={'value_and_evaluation_calls':depth_limited_minimax([[3,5],[1,9]],2)}
     domains={'A':[1,2],'B':[1,2],'C':[1,2],'D':[1,2]};edges=[('A','B'),('B','C'),('C','D'),('D','A')]
     impossible={'P':[1],'Q':[1],'R':[1,2]};iedges=[('P','Q')]
     results['csp']={'without_propagation':exam_csp(domains,edges,False),'with_propagation':exam_csp(domains,edges,True),'propagation_failure_without_search':exam_csp(impossible,iedges,True)}
@@ -178,9 +197,12 @@ def main():
         tsp.append({'n':n,'permutations':count,'optimum':opt,'optimal_tour':ot,'local_runs':runs,'mean_gap_percent':sum(x['gap_percent'] for x in runs)/20})
     results['tsp']=tsp
     tree=[[[3,5],[6,9]],[[1,2],[0,4]],[[7,8],[2,3]]];original=alphabeta(tree)
+    def last_leaf(node):
+        while isinstance(node,list): node=node[-1]
+        return node
     def ordered(node,maxing=True):
         if not isinstance(node,list):return node
-        scored=[(minimax(ch,5,not maxing)[0],ch) for ch in node];scored.sort(key=lambda x:x[0],reverse=maxing)
+        scored=[(last_leaf(ch),ch) for ch in node];scored.sort(key=lambda x:x[0],reverse=maxing)
         return [ordered(ch,not maxing) for _,ch in scored]
     results['redesign']={'baseline_value_nodes_cutoffs':original,'ordered_value_nodes_cutoffs':alphabeta(ordered(tree)),'design':'order children by inexpensive estimate before alpha-beta; ordering has overhead'}
     json.dump(results,open('results/experiments.json','w'),indent=2)
