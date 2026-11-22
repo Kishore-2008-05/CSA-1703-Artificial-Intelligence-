@@ -101,7 +101,7 @@
       },
       "nodes": 6,
       "backtracks": 2,
-      "checks": 0
+      "checks": 24
     },
     "with_propagation": {
       "solution": {
@@ -112,7 +112,7 @@
       },
       "nodes": 1,
       "backtracks": 0,
-      "checks": 43
+      "checks": 47
     },
     "propagation_failure_without_search": {
       "solution": null,
