@@ -132,12 +132,13 @@ def exam_csp(domains,edges,propagate=True):
                     if z==x and w!=y:queue.append((w,x))
         return True
     def backtrack():
-        nonlocal nodes,backs
+        nonlocal nodes,backs,checks
         if all(len(d)==1 for d in D.values()):return {v:next(iter(d)) for v,d in D.items()}
         v=min((x for x in D if len(D[x])>1),key=lambda x:len(D[x]));snapshot={x:set(d) for x,d in D.items()}
         for val in sorted(D[v]):
             nodes+=1;D[v]={val};ok=True
             for a,b in edges:
+                checks+=1
                 if a==v and len(D[b])==1 and val in D[b]:ok=False
                 if b==v and len(D[a])==1 and val in D[a]:ok=False
             if ok and (not propagate or ac3([(a,b) for a,b in edges]+[(b,a) for a,b in edges])):
