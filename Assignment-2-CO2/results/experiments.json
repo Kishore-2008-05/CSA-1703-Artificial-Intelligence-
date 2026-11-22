@@ -169,5 +169,12 @@
       3,
       4
     ]
+  },
+  "minimax_quality": {
+    "games": 20,
+    "initial_stones": 10,
+    "ai_wins": 20,
+    "win_rate_percent": 100,
+    "opponent": "uniform random legal take of 1 or 2"
   }
 }
