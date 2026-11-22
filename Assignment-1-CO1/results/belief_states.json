@@ -1,0 +1,8 @@
+[
+ {"k":2,"belief_states_upper_bound":4,"plan_actions_proxy":4,"sensor":false},
+ {"k":2,"belief_states_upper_bound":4,"plan_actions_proxy":2,"sensor":true},
+ {"k":4,"belief_states_upper_bound":16,"plan_actions_proxy":16,"sensor":false},
+ {"k":4,"belief_states_upper_bound":16,"plan_actions_proxy":4,"sensor":true},
+ {"k":8,"belief_states_upper_bound":256,"plan_actions_proxy":64,"sensor":false},
+ {"k":8,"belief_states_upper_bound":256,"plan_actions_proxy":8,"sensor":true}
+]
