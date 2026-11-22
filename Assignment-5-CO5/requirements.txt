@@ -1,0 +1,7 @@
+# Baseline uses only Python standard library.
+# Optional for future charts / public dataset experiments:
+# numpy
+# pandas
+# matplotlib
+# scikit-learn
+# pyspark
